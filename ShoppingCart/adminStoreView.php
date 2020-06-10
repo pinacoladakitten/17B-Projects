@@ -5,7 +5,7 @@
 	include("includes/handlers/getInputValue.php");
 
 	// Create Account Class
-	$account = new Account($con);
+	$account = new Account($con, $SQL_usersTable, $SQL_storeTable);
 
 	include("includes/handlers/addItem-handler.php");
  ?>
@@ -25,7 +25,7 @@
 
 			<form id="cartDelForm" action="adminStoreView.php" method="POST">
 				<?php
-					$storeQuery = mysqli_query($con, "SELECT * FROM storeItems");
+					$storeQuery = mysqli_query($con, "SELECT * FROM $SQL_storeTable");
 					$ItemQ = array();
 
 					while($store = mysqli_fetch_array($storeQuery)){
@@ -56,7 +56,7 @@
 						// Get the item
 						$selected = $_POST['delItem'];
 						// Delete the item from SQL
-						$storeQueryDel = mysqli_query($con, "DELETE FROM storeItems WHERE id='$selected'");
+						$storeQueryDel = mysqli_query($con, "DELETE FROM $SQL_storeTable WHERE id='$selected'");
 						header("Location: adminStoreView.php");
 					}
   				?>

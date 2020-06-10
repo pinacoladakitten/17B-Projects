@@ -7,7 +7,7 @@
 	include("includes/classes/Item.php");		// Item Class
 
 	// Create Account Class
-	$account = new Account($con);
+	$account = new Account($con, $SQL_usersTable, $SQL_storeTable);
 
 	include("includes/handlers/change-handler.php");
  ?>
@@ -29,7 +29,7 @@
 
 			<form id="userEditForm" action="adminViewEdit.php" method="GET">
 				<?php
-					$usersQuery = mysqli_query($con, "SELECT * FROM users ORDER BY signUpDate");
+					$usersQuery = mysqli_query($con, "SELECT * FROM $SQL_usersTable ORDER BY signUpDate");
 					echo "*Click on a username to edit details.*";
 					$editUser = $userLoggedIn;
 
@@ -67,11 +67,11 @@
 								for($i=0; $i < count($curItems); $i++){
 
 									if(!in_array($curItems[$i], $itemQ)){
-										$storeQuery = mysqli_query($con, "SELECT * FROM storeItems WHERE id=$curItems[$i]");
+										$storeQuery = mysqli_query($con, "SELECT * FROM $SQL_storeTable WHERE id=$curItems[$i]");
 										$store = mysqli_fetch_array($storeQuery);
 
 										// Create Item Class
-										$item = new Item($curItems[$i], $con, $user['username'], $store);
+										$item = new Item($curItems[$i], $con, $user['username'], $store, $SQL_usersTable, $SQL_storeTable);
 
 										echo "<table>
 												<div class='gridViewItem'>
@@ -106,14 +106,14 @@
 							$selected = $_GET['delItem'];
 							$arr = explode(",", $selected);
 							// Search in array for item and delete
-							$usersQuery = mysqli_query($con, "SELECT * FROM users WHERE username='$arr[1]'");
+							$usersQuery = mysqli_query($con, "SELECT * FROM $SQL_usersTable WHERE username='$arr[1]'");
 							$user = mysqli_fetch_array($usersQuery);
 							$uCart = explode(",", $user['Cart']);
 							$idx = array_search($arr[0], $uCart);
 							unset($uCart[$idx]);
 							//Put item array back into SQL
 							$myItems = implode(",", $uCart);
-							$result = mysqli_query($con, "UPDATE users SET Cart='$myItems' WHERE username='$arr[1]'");
+							$result = mysqli_query($con, "UPDATE $SQL_usersTable SET Cart='$myItems' WHERE username='$arr[1]'");
 							header("Location: adminViewEdit.php");
 						}
 						echo "</br></br>";
