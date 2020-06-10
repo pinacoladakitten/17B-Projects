@@ -1,0 +1,21 @@
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+	width: 25%;
+}
+
+td {
+	text-align: center;
+}
+
+#starMeaning{
+	color: #FE0000;
+}
+
+.getUser *{
+	cursor: pointer;
+	color: #0064FF;
+	text-decoration: underline;
+}

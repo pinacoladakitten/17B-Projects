@@ -1,0 +1,20 @@
+html, body {
+	padding:0;
+	margin:0;
+	height:100%;
+	background-color: #fff
+}
+
+#backgroundMain{
+	background-color: #fff;
+	/*background-image:url(../images/profile-pic/mark1.jpg);*/
+	background-repeat: repeat;
+	background-size: 100%;
+	display:table;
+	height:100%;
+	width:100%;
+}
+
+h3 {
+	background-color: #fff;
+}

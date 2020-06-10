@@ -1,0 +1,29 @@
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+	width: 25%;
+}
+
+td {
+	text-align: center;
+}
+
+#starMeaning{
+	color: #FE0000;
+}
+
+/*#backgroundMain{
+	background-color: #000;
+	background-repeat: repeat;
+	background-size: 100%;
+	display:table;
+	height:100%;
+	width:100%;
+}
+
+h3, body{
+	background-color: #000;
+}
+*/
